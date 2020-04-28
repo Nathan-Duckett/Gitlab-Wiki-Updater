@@ -4,6 +4,19 @@ This app is designed to simplify updating the timetable in Gitlab Wiki to track 
 
 This will append lab information for every member who is listed in your config file.
 
+## Configuration
+Move `template.config.yaml` to `config.yaml` and add the corresponding values required.
+```yaml
+rootURI: 'gitlab api endpoint e.g. "https://gitlab.ecs.vuw.ac.nz/api/v4/"'
+PAT: 'Personal Access Token generated from gitlab'
+projectID: 'Project ID of the repo you want to manage'
+wikiSlug: 'Slug of the wiki page you're updating (final part of the web link) e.g. "Lab-time-log"'
+names:
+    - Nathan Duckett
+    - "List of names to be added on each line of the table"
+```
+You must [Generate PAT](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html) for your profile with **API** privileges.
+
 ## Usage
 
 Basic usage requires you to pass three parameters date, time in, and time out. Without these the program will not be able to work correctly.
