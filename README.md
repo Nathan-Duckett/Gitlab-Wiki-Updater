@@ -23,6 +23,9 @@ Basic usage requires you to pass three parameters date, time in, and time out. W
 
 Before Usage make sure to copy `template.config.yaml` to `config.yaml` and fill out the corresponding fields.
 
+**Note if options are not provided it will default to TODAY's DATE, and from 1PM to 2PM**
+Options can be omitted if these defaults suit depending on what is necessary.
+
 ```bash
 # Install dependencies on first use
 python3 -m pip install -r requirements.txt

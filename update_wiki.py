@@ -3,6 +3,8 @@ import json
 import requests
 import yaml
 
+from datetime import datetime
+
 # Must be before data declaration
 def load_config():
     """Load yaml config"""
@@ -23,7 +25,11 @@ def load_content(args):
     content += "| Lab date   | Lab time (morning/afternoon) | Person         | Arrive time | Departure time |\n"
     content += "| ---------- | :--------------------------: | -------------: | ----------- | -------------- |\n"
 
-    session_time = "afternoon" if "pm" in args.time_out else "morning"
+    # Check exists else default to afternoon
+    if args.time_out:
+        session_time = "afternoon" if "pm" in args.time_out else "morning"
+    else:
+        session_time = "afternoon"
 
     for name in config['names']:
         content += f"| {args.date} | {session_time} | {name} | {args.time_in} | {args.time_out} |\n"
@@ -75,6 +81,26 @@ def setID(id, content):
     return content.replace("$ID", str(id))
 
 
+def checkAndDefaultArgs(args):
+    """Go through and check the args are valid otherwise default them to specific values"""
+    if not args.date:
+        args.date = datetime.now().strftime("%d/%m/%Y")
+
+    if args.time_in:
+        if "am" not in args.time_in and "pm" not in args.time_in:
+            print("Invalid time_in string provided: Using default 1pm")
+            args.time_in = "1pm"
+    else:
+        args.time_in = "1pm"
+
+    if args.time_out:
+        if "am" not in args.time_out and "pm" not in args.time_out:
+            print("Invalid time_out string provided: Using default 2pm")
+            args.time_out = "2pm"
+    else:
+        args.time_out = "2pm"
+
+
 def parse_args():
     """Parse the incoming CLI arguments for the date and lab times to input into the wiki doc"""
     parser = argparse.ArgumentParser()
@@ -87,6 +113,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    checkAndDefaultArgs(args)
 
     # Load new content
     content = load_content(args)
