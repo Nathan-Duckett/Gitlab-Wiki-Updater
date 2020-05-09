@@ -25,9 +25,9 @@ def load_content(args):
     content += "| Lab date   | Lab time (morning/afternoon) | Person         | Arrive time | Departure time |\n"
     content += "| ---------- | :--------------------------: | -------------: | ----------- | -------------- |\n"
 
-    # Check exists else default to afternoon
-    if args.time_out:
-        session_time = "afternoon" if "pm" in args.time_out else "morning"
+    # Check exists else default to afternoon | Based off time_in time
+    if args.time_in:
+        session_time = "afternoon" if "pm" in args.time_in else "morning"
     else:
         session_time = "afternoon"
 

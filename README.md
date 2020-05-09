@@ -26,6 +26,8 @@ Before Usage make sure to copy `template.config.yaml` to `config.yaml` and fill 
 **Note if options are not provided it will default to TODAY's DATE, and from 1PM to 2PM**
 Options can be omitted if these defaults suit depending on what is necessary.
 
+The lab time will be based off when the time-in begins. For example starting at 11am will result in a morning lab whereas starting at 12pm will be considered an afternoon lab, no matter what time the lab finishes as it is based on when it starts.
+
 ```bash
 # Install dependencies on first use
 python3 -m pip install -r requirements.txt
