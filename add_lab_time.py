@@ -40,7 +40,7 @@ def load_content(args):
 def upload_content(newContent):
     """Get the current Wiki document content, append the new timetable to the content and upload it back to Gitlab"""
     # Get current content from Wiki
-    currentWiki = requests.get(f"{config['rootURI']}/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
+    currentWiki = requests.get(f"{config['rootURI']}/api/v4/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
     headers={"PRIVATE-TOKEN": config['PAT']})
 
     # Append load_content to current content
@@ -53,7 +53,7 @@ def upload_content(newContent):
     content = oldContent + newContent
 
     # Push changes to Gitlab
-    requests.put(f"{config['rootURI']}/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
+    requests.put(f"{config['rootURI']}/api/v4/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
     headers={"PRIVATE-TOKEN": config['PAT']},
     params={"content": content})
     return

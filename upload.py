@@ -12,7 +12,7 @@ def load_config():
         return config
 
 def uploadContent(content):
-    requests.put(f"{config['rootURI']}/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
+    requests.put(f"{config['rootURI']}/api/v4/projects/{config['projectID']}/wikis/{config['wikiSlug']}",
     headers={"PRIVATE-TOKEN": config['PAT']},
     params={"content": content})
 
